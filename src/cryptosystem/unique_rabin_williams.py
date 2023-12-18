@@ -1,8 +1,10 @@
 # from random import randint
 from typing import Tuple
-from ..log_config import logging
 
 from utils import chrem, generate_prime
+
+from ..log_config import logging
+
 logger = logging.getLogger(__name__)
 
 

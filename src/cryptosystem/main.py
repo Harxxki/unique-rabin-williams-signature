@@ -1,5 +1,7 @@
 import argparse
+
 from sympy import isprime
+
 from src.cryptosystem import utils
 from src.cryptosystem.unique_rabin_williams import (
     UniqueRabinWilliamsDecryptor,
@@ -22,7 +24,7 @@ def validate_inputs(p: int, q: int, s: int, M: int) -> bool:
         raise ValueError("Both p and q must be prime numbers.")
     if p % 4 != 3 or q % 4 != 3:
         raise ValueError("Both p and q must be congruent to 3 mod 4.")
-    if not 1 < s < q ** 0.5:
+    if not 1 < s < q**0.5:
         raise ValueError("s must be greater than 1 and less than sqrt(q).")
     N = p * p * q
     if not 0 < M < N / s:
