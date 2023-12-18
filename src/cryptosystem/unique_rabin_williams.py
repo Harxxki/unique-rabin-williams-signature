@@ -1,7 +1,9 @@
 # from random import randint
 from typing import Tuple
+from ..log_config import logging
 
 from utils import chrem, generate_prime
+logger = logging.getLogger(__name__)
 
 
 class UniqueRabinWilliamsKeyGenerator:
@@ -26,5 +28,8 @@ class UniqueRabinWilliamsDecryptor:
     def decrypt(D: int, p: int, q: int) -> int:
         R1 = pow(D, (p + 1) // 4, p)
         R2 = pow(D, (q + 1) // 4, q)
+        logger.debug(f"R1: {R1}, R2: {R2}")
         M = [chrem([R1, R2], [p, q]), chrem([R1, -R2], [p, q]), chrem([-R1, R2], [p, q]), chrem([-R1, -R2], [p, q])]
+        logger.debug(f"M: {M}")
+        print()
         return min(M)
