@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flake8 = "*"
+isort = "*"
+black = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.0"
+
+[scripts]
+lint = "zsh -c 'flake8 ./src && isort --check --diff ./src && black --check ./src'"
+format = "zsh -c 'isort ./src && black --line-length 119 ./src'"
