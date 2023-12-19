@@ -3,9 +3,9 @@ import argparse
 from sympy import isprime
 
 from src import utils
-from src.cryptosystem.unique_rabin_williams import (
-    UniqueRabinWilliamsDecryptor,
-    UniqueRabinWilliamsEncryptor,
+from src.signature.unique_rabin_williams import (
+    UniqueRabinWilliamsSigner,
+    UniqueRabinWilliamsVerifier,
     UniqueRabinWilliamsKeyGenerator,
 )
 
@@ -46,11 +46,13 @@ def main():
         M = 500000  # Example message
         print(f"Generated N: {N}, p: {p}, q: {q}, s: {s}")
 
-    D = UniqueRabinWilliamsEncryptor.encrypt(M, N)
-    print(f"Encrypted message: {D}")
+    signer = UniqueRabinWilliamsSigner(p=p, q=q, s=s)
+    signature = signer.sign(M=M)
+    print(f"Signature: {signature}")
 
-    decrypted_message = UniqueRabinWilliamsDecryptor.decrypt(D, p, q)
-    print(f"Decrypted message: {decrypted_message}")
+    verifier = UniqueRabinWilliamsVerifier()
+    verification = verifier.verify(signature=signature, p=p, q=q, M=M)
+    print(f"Verification: {verification}")
 
 
 if __name__ == "__main__":
