@@ -21,10 +21,8 @@ class UniqueRabinWilliamsSigner:
         return self._sign(M)
 
     def _sign(self, M: int) -> int:
-        _signature = pow(M, 2, self.p * self.q)
-        logger.debug(f"_signature: {_signature}")
-        R1 = pow(_signature, (self.p + 1) // 4, self.p)
-        R2 = pow(_signature, (self.q + 1) // 4, self.q)
+        R1 = pow(M, (self.p + 1) // 4, self.p)
+        R2 = pow(M, (self.q + 1) // 4, self.q)
         logger.debug(f"R1: {R1}, R2: {R2}")
         _signatures = chrem([R1, R2], [self.p, self.q]), chrem([R1, -R2], [self.p, self.q]), \
             chrem([-R1, R2], [self.p, self.q]), chrem([-R1, -R2], [self.p, self.q])

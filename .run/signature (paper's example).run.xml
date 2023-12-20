@@ -14,7 +14,7 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/signature/main.py" />
-    <option name="PARAMETERS" value="--p 1187 --q 2351 --s 4 --M 500000" />
+    <option name="PARAMETERS" value="--p 1187 --q 2351 --s 4 --M 1563541075" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

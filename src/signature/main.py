@@ -27,8 +27,8 @@ def validate_inputs(p: int, q: int, s: int, M: int) -> bool:
     if not 1 < s < q**0.5:
         raise ValueError("s must be greater than 1 and less than sqrt(q).")
     N = p * p * q
-    if not 0 < M < N / s:
-        raise ValueError("M must be in the range (0, N/s).")
+    # if not 0 < M < N / s:
+    #     raise ValueError("M must be in the range (0, N/s).")
     if not utils.is_coprime(M, N):
         raise ValueError("M and N must be coprime.")
     return True
