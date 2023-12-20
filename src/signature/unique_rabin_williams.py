@@ -21,7 +21,7 @@ class UniqueRabinWilliamsSigner:
         return self._sign(M)
 
     def _sign(self, M: int) -> int:
-        _signature = pow(M, 2, self.N)
+        _signature = pow(M, 2, self.p * self.q)
         logger.debug(f"_signature: {_signature}")
         R1 = pow(_signature, (self.p + 1) // 4, self.p)
         R2 = pow(_signature, (self.q + 1) // 4, self.q)
