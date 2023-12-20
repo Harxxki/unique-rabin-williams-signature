@@ -24,8 +24,12 @@ class UniqueRabinWilliamsSigner:
         R1 = pow(M, (self.p + 1) // 4, self.p)
         R2 = pow(M, (self.q + 1) // 4, self.q)
         logger.debug(f"R1: {R1}, R2: {R2}")
-        _signatures = chrem([R1, R2], [self.p, self.q]), chrem([R1, -R2], [self.p, self.q]), \
-            chrem([-R1, R2], [self.p, self.q]), chrem([-R1, -R2], [self.p, self.q])
+        _signatures = (
+            chrem([R1, R2], [self.p, self.q]),
+            chrem([R1, -R2], [self.p, self.q]),
+            chrem([-R1, R2], [self.p, self.q]),
+            chrem([-R1, -R2], [self.p, self.q]),
+        )
         logger.debug(f"_signatures: {_signatures}")
         logger.debug(f"min(_signatures): {min(_signatures)}")
         return min(_signatures)
@@ -47,7 +51,7 @@ class UniqueRabinWilliamsKeyGenerator:
         q = generate_prime(3)
         # s = randint(2, int(q**0.5))
         s = 2  # とりあえず2に固定
-        N = p ** 2 * q
+        N = p**2 * q
         return N, p, q, s
 
 
@@ -63,8 +67,7 @@ class UniqueRabinWilliamsDecryptor:
         R1 = pow(D, (p + 1) // 4, p)
         R2 = pow(D, (q + 1) // 4, q)
         logger.debug(f"R1: {R1}, R2: {R2}")
-        M = [chrem([R1, R2], [p, q]), chrem([R1, -R2], [p, q]), chrem([-R1, R2], [p, q]),
-             chrem([-R1, -R2], [p, q])]
+        M = [chrem([R1, R2], [p, q]), chrem([R1, -R2], [p, q]), chrem([-R1, R2], [p, q]), chrem([-R1, -R2], [p, q])]
         logger.debug(f"M: {M}")
         print()
         return min(M)
