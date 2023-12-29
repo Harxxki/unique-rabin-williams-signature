@@ -3,10 +3,10 @@ import argparse
 from sympy import isprime
 
 from src import utils
-from src.cryptosystem.unique_rabin_williams import (
-    UniqueRabinWilliamsDecryptor,
-    UniqueRabinWilliamsEncryptor,
+from src.signature.unique_rabin_williams import (
     UniqueRabinWilliamsKeyGenerator,
+    UniqueRabinWilliamsSigner,
+    UniqueRabinWilliamsVerifier,
 )
 
 
@@ -27,8 +27,8 @@ def validate_inputs(p: int, q: int, s: int, M: int) -> bool:
     if not 1 < s < q**0.5:
         raise ValueError("s must be greater than 1 and less than sqrt(q).")
     N = p * p * q
-    if not 0 < M < N / s:
-        raise ValueError("M must be in the range (0, N/s).")
+    # if not 0 < M < N / s:
+    #     raise ValueError("M must be in the range (0, N/s).")
     if not utils.is_coprime(M, N):
         raise ValueError("M and N must be coprime.")
     return True
@@ -46,11 +46,13 @@ def main():
         M = 500000  # Example message
         print(f"Generated N: {N}, p: {p}, q: {q}, s: {s}")
 
-    D = UniqueRabinWilliamsEncryptor.encrypt(M, N)
-    print(f"Encrypted message: {D}")
+    signer = UniqueRabinWilliamsSigner(p=p, q=q, s=s)
+    signature = signer.sign(M=M)
+    print(f"Signature: {signature}")
 
-    decrypted_message = UniqueRabinWilliamsDecryptor.decrypt(D, p, q)
-    print(f"Decrypted message: {decrypted_message}")
+    verifier = UniqueRabinWilliamsVerifier()
+    verification = verifier.verify(signature=signature, p=p, q=q, M=M)
+    print(f"Verification: {verification}")
 
 
 if __name__ == "__main__":

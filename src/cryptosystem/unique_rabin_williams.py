@@ -1,7 +1,7 @@
 # from random import randint
 from typing import Tuple
 
-from utils import chrem, generate_prime
+from src.utils import chrem, generate_prime
 
 from ..log_config import logging
 
