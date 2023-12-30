@@ -3,13 +3,12 @@ import argparse
 from sympy import isprime
 
 from src import utils
+from src.log_config import logging
 from src.signature.unique_rabin_williams import (
     UniqueRabinWilliamsKeyGenerator,
     UniqueRabinWilliamsSigner,
     UniqueRabinWilliamsVerifier,
 )
-
-from src.log_config import logging
 
 logger = logging.getLogger(__name__)
 

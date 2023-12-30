@@ -10,7 +10,7 @@ def generate_prime(mod4: int) -> int:
     Generate a prime number p such that p ≡ mod4 (mod 4).
     """
     while True:
-        p = random.randint(2 ** 10, 2 ** 11)  # or a suitable range
+        p = random.randint(2**10, 2**11)  # or a suitable range
         if p % 4 == mod4 and isprime(p):
             return p
 

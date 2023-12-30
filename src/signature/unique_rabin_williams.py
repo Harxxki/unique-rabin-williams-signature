@@ -1,9 +1,8 @@
 # from random import randint
 from typing import Tuple
 
-from src.utils import chrem, generate_prime
-
 from src.log_config import logging
+from src.utils import chrem, generate_prime
 
 logger = logging.getLogger(__name__)
 
