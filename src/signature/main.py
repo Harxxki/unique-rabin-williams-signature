@@ -9,6 +9,10 @@ from src.signature.unique_rabin_williams import (
     UniqueRabinWilliamsVerifier,
 )
 
+from src.log_config import logging
+
+logger = logging.getLogger(__name__)
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Unique Rabin-Williams Cryptosystem")
@@ -27,8 +31,8 @@ def validate_inputs(p: int, q: int, s: int, M: int) -> bool:
     if not 1 < s < q**0.5:
         raise ValueError("s must be greater than 1 and less than sqrt(q).")
     N = p * p * q
-    # if not 0 < M < N / s:
-    #     raise ValueError("M must be in the range (0, N/s).")
+    if utils.legendre_symbol(M, p) * utils.legendre_symbol(M, q) != 1:
+        raise ValueError(f"M({M}) must be a quadratic residue mod pq({p*q}).")
     if not utils.is_coprime(M, N):
         raise ValueError("M and N must be coprime.")
     return True
@@ -40,11 +44,13 @@ def main():
     if args.p and args.q and args.s and args.M:
         p, q, s, M = args.p, args.q, args.s, args.M
         validate_inputs(p, q, s, M)
+        logger.debug("params are valid")
         N = p * q * q
+        print(f"Inputs: N: {N}, p: {p}, q: {q}, s: {s}, M: {M}")
     else:
         N, p, q, s = UniqueRabinWilliamsKeyGenerator.generate_keys()
         M = 500000  # Example message
-        print(f"Generated N: {N}, p: {p}, q: {q}, s: {s}")
+        print(f"Generated N: {N}, p: {p}, q: {q}, s: {s}, M: {M}")
 
     signer = UniqueRabinWilliamsSigner(p=p, q=q, s=s)
     signature = signer.sign(M=M)

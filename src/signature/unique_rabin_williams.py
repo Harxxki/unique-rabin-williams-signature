@@ -3,7 +3,7 @@ from typing import Tuple
 
 from src.utils import chrem, generate_prime
 
-from ..log_config import logging
+from src.log_config import logging
 
 logger = logging.getLogger(__name__)
 
@@ -16,8 +16,6 @@ class UniqueRabinWilliamsSigner:
         self.s = s
 
     def sign(self, M: int) -> int:
-        # if not 0 < M < self.N / self.s:
-        #     raise ValueError("M must be in the range (0, N/s).")
         return self._sign(M)
 
     def _sign(self, M: int) -> int:
