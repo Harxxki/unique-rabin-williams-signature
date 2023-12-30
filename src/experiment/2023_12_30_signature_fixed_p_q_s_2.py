@@ -3,7 +3,6 @@ import argparse
 from sympy import isprime
 from tabulate import tabulate
 
-from src import utils
 from src.experiment.log_config import setup_logger
 from src.signature.unique_rabin_williams import UniqueRabinWilliamsSigner, UniqueRabinWilliamsVerifier
 from src.utils import legendre_symbol
@@ -26,7 +25,7 @@ def create_plaintext_space(p: int, q: int) -> list[int]:
     upper = min(N, 100000)
     logger.debug(f"Upper: {upper}")
     for M in range(1, upper):
-        if legendre_symbol(M, p) == 1 and legendre_symbol(M, q) == 1 and utils.is_coprime(M, N):
+        if legendre_symbol(M, p) == 1 and legendre_symbol(M, q) == 1:
             # logger.debug(f"Found M: {M}")
             plaintexts.append(M)
         if M % 1000000 == 0:
