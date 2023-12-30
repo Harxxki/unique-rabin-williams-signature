@@ -11,6 +11,7 @@ cryptography = "*"
 sympy = "*"
 
 [dev-packages]
+tabulate = "*"
 
 [requires]
 python_version = "3.11"

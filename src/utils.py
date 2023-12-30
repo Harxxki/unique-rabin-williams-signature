@@ -1,3 +1,4 @@
+import math
 import random
 from math import gcd
 
@@ -39,3 +40,19 @@ def chrem(R: list[int], M: list[int]) -> int:
 
 def is_coprime(a: int, b: int) -> bool:
     return gcd(a, b) == 1
+
+
+def quadratic_residue(a: int, p: int) -> bool:
+    """
+    Returns True if a is a quadratic residue mod p.
+    """
+    return pow(a, (p - 1) // 2, p) == 1
+
+
+def legendre_symbol(a: int, p: int) -> int:
+    if math.gcd(a, p) != 1:
+        return 0
+    if quadratic_residue(a, p):
+        return 1
+    else:
+        return -1
