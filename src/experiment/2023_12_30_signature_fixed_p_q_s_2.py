@@ -66,7 +66,7 @@ def main():
             logger.debug(f"M: {M}, Signature: {signature}, Verification: {verification}")
             results_all.append({"M": M, "Signature": signature, "Verification": verification})
             if verification:
-                results_valid.append({f"M: {M}, Signature: {signature}, Verification: {verification}"})
+                results_valid.append({"M": M, "Signature": signature, "Verification": verification})
         except ValueError as e:
             logger.error(e)
 

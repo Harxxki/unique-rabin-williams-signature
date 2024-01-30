@@ -3,6 +3,8 @@ import random
 from math import gcd
 
 from sympy import isprime
+from src.log_config import logging
+logger = logging.getLogger(__name__)
 
 
 def generate_prime(mod4: int) -> int:
@@ -25,16 +27,22 @@ def chrem(R: list[int], M: list[int]) -> int:
     >>> chrem([2, 3, 2], [3, 5, 7])
     23
     """
+    logger.debug(f"R: {R}")
+    logger.debug(f"M: {M}")
     assert len(R) == len(M)
     n = len(R)
     M_prod = 1
     for i in range(n):
         M_prod *= M[i]
     M_i = [M_prod // M[i] for i in range(n)]
+    logger.debug(f"M_i: {M_i}")
     M_i_inv = [pow(M_i[i], -1, M[i]) for i in range(n)]
+    logger.debug(f"M_i_inv: {M_i_inv}")
     X = 0
     for i in range(n):
+        logger.debug(f"i: {i}, R[i]: {R[i]}, M_i[i]: {M_i[i]}, M_i_inv[i]: {M_i_inv[i]}")
         X += R[i] * M_i[i] * M_i_inv[i]
+        logger.debug(f"X: {X}")
     return X % M_prod
 
 
